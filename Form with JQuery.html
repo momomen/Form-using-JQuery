@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+    <title>jQuery-5</title>
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<script type="text/javascript" src="jquery.min.js"></script>
+    
+	<style type="text/css">
+		
+		body {
+			
+			font-family: helvetica, sans-serif;
+			background-color:rgb(193,193,193);
+            font-size: 130%;
+            
+        }
+        
+        label {
+            
+            position:relative;
+            top:7px;
+            float:left;
+            width: 200px;
+            
+        }
+		
+        #container {
+            
+            width: 600px;
+            margin: 0 auto;
+            
+        }
+        
+        input {
+            
+            width: 300px;
+            font-size: 20px;
+            padding: 5px 5px 5px 5px;
+            border-radius: 5px;
+            border:1px solid grey;
+            
+        }
+		
+        
+        .form-element {
+            
+            margin:5px;
+            
+        }
+        
+        #submit {
+            
+            width:120px;
+            margin-left: 200px;
+            background-color: rgba(144, 12, 63, 0.9);
+            
+        }
+        
+        #error {
+            
+            width: 300px;
+            font-size: 75% !important;
+            position: relative;
+            background-color: rgba(229, 243, 237, 0.9);
+            margin-left: 150px;
+            margin-top: 0px;
+            border:1px solid #900C3F;
+            display:none;
+            padding: 4px 0px 0px 4px;
+            border-radius: 6px;
+            
+        }
+        
+         #success {
+            
+            width: 300px;
+            font-size: 75% !important;
+            position: relative;
+            background-color: rgba(229, 243, 237, 0.9);
+            margin-left: 150px;
+            border:1px solid #16850F;
+            display:none;
+            padding: 5px 0px 5px 5px;
+            border-radius: 6px;
+            
+        }
+        
+        ul p {
+            
+            margin-left: -40px;
+           
+        }
+	</style>
+	
+	
+</head>
+
+<body>
+	<div id="container">
+        
+        <div id="success">Thank you! Form has been successfully submitted!!</div>
+        
+        <div id="error"></div>
+       
+        <div class="form-element">
+            
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" placeholder="e.g: yourname@gmail.com">
+            
+        </div>
+        
+         <div class="form-element">
+        
+            <label for="phone">Telephone</label>
+            <input type="text" id="phone" name="phone" placeholder="e.g: 0123456789">
+	
+        </div>
+        
+         <div class="form-element">
+        
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+	
+        </div>
+        
+        <div class="form-element">
+        
+            <label for="passwordConfirm">Confirm Password</label>
+            <input type="password" id="passwordConfirm" name="passwordConfirm">
+	
+        </div>
+        
+        <div class="form-element">
+        
+            <input type="submit" id="submit" value="Sign Up">
+	
+        </div>
+        
+	</div>
+    
+    
+	<script type="text/javascript">
+		
+        function isEmail(email) {
+            
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            
+            return regex.test(email);
+            
+        };
+        
+        $("#submit").click (function(){
+            
+            var errormessage = "";
+            
+            var missingFields = "";
+            
+            if ($("#email").val() == "") {
+                
+                missingFields += "<li>E-mail is missing</li>";
+                
+            };
+            
+            if ($("#phone").val() == "") {
+                
+                missingFields += "<li>Phone number is missing</li>";
+                
+            };
+            
+            if ($("#password").val() == "") {
+                
+                missingFields += "<li>password is missing</li>";
+                
+            };
+            
+            if ($("#passwordConfirm").val() == "") {
+                
+                missingFields += "<li>Please confirm password</li>";
+                
+            };
+            
+            if (missingFields != "") {
+                
+                errormessage += "<ul><p>The following field(s) are missing: </p>" + missingFields + "</ul>";
+                
+            }
+            
+            if (isEmail($("#email").val()) == false) {
+                
+                errormessage += "<p>You E-mail is not valid!</p>";
+                
+            };
+            
+            if ($.isNumeric($("#phone").val()) == false) {
+                
+                errormessage += "<p>You phone number is not correct!</p>";  
+                
+            };
+            
+            if ($("#password").val() != $("#passwordConfirm").val()) {
+                
+                errormessage += "<p>Please confirm your password correctly!</p>"
+                
+            };
+            
+            if (errormessage != "") {
+                
+                
+                $("#error").html(errormessage).slideDown(1500);
+                
+            } else {
+                
+                $("#success").slideDown(1000);
+                $("#error").hide();
+                
+            }
+            
+        });
+       
+        
+	</script>
+	
+</body>
+</html>
+
